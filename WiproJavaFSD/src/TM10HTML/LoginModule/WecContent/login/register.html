@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <script>
+        function validateForm() {
+            var password = document.forms["regForm"]["password"].value;
+            // Password: min 6 chars, at least one number, one uppercase.
+            var passRegex = /^(?=.*\d)(?=.*[A-Z]).{6,}$/;
+            if (!passRegex.test(password)) {
+                alert("Password must be at least 6 characters long and contain at least one number and one uppercase letter.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+<h2>Registration Form</h2>
+<form name="regForm" action="register" method="post" onsubmit="return validateForm()">
+    User Id: <input type="text" name="userid" required minlength="4" maxlength="8"><br><br>
+    Password: <input type="password" name="password" required><br><br>
+    Date Of birth: <input type="date" name="dob" required max="${new Date().toISOString().split('T')[0]}"><br><br>
+    Gender: <input type="radio" name="gender" value="Male" checked> Male
+    <input type="radio" name="gender" value="Female"> Female<br><br>
+    State: <select name="state">
+    <option>Karnataka</option>
+    <option>Maharashtra</option>
+    <option>Tamil Nadu</option>
+</select><br><br>
+    Contact number: <input type="tel" name="contact" required pattern="[0-9]{10}"><br><br>
+    Address: <textarea name="address" rows="4" cols="30"></textarea><br><br>
+    <input type="submit" value="submit">
+    <input type="reset" value="reset">
+</form>
+<p style="color:red;">${errorMessage}</p>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <script>
+        function validateForm() {
+            var pass = document.forms["regForm"]["password"].value;
+            var retypePass = document.forms["regForm"]["retypePassword"].value;
+            if (pass !== retypePass) {
+                alert("Passwords do not match!");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<h2>New User Registration</h2>
+<p style="color:red;">${errorMessage}</p>
+<form name="regForm" action="register" method="post" onsubmit="return validateForm()">
+    User Name: <input type="text" name="username" required><br><br>
+    Password: <input type="password" name="password" required><br><br>
+    Retype Password: <input type="password" name="retypePassword" required><br><br>
+    <input type="submit" value="Add">
+</form>
+</body>
+</html>

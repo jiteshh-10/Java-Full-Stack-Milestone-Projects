@@ -1,0 +1,32 @@
+-- Create the Employee table
+CREATE TABLE Employee (
+    ID NUMBER PRIMARY KEY,
+    Name VARCHAR2(100) NOT NULL,
+    Gender VARCHAR2(10),
+    Designation VARCHAR2(100),
+    Salary NUMBER(10, 2),
+    City VARCHAR2(100),
+    Email VARCHAR2(100) UNIQUE,
+    Mobile_No VARCHAR2(15)
+);
+
+-- Create a sequence for auto-incrementing the Employee ID
+CREATE SEQUENCE employee_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCACHE
+  NOCYCLE;
+
+-- Create a Users table for login (linking username to an employee ID)
+CREATE TABLE Users (
+    username VARCHAR2(50) PRIMARY KEY,
+    password VARCHAR2(50) NOT NULL,
+    employee_id NUMBER,
+    FOREIGN KEY (employee_id) REFERENCES Employee(ID)
+);
+
+-- Insert a sample employee and a corresponding user for testing
+-- Note: Manually insert the first user who can then add others.
+INSERT INTO Employee VALUES (employee_id_seq.nextval, 'Admin User', 'Male', 'Administrator', 80000, 'Corporate', 'admin@example.com', '9876543210');
+INSERT INTO Users VALUES ('admin', 'admin123', 1);
+COMMIT;
